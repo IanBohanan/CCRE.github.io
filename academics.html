@@ -179,6 +179,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<header role="banner">
 	
 	<style>
+
+.section {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: height 0.7s ease;
+	  height: 0; /* Set initial height to 0 */
+    }
+
+    /* Style for the "Read More" link */
+    .read-more {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      background-color: #f2f2f2;
+      cursor: pointer;
+	  background-color: #0077c8;
+	  color: white;
+	  font-weight: bold;
+    }
+
 div#uah50 {
 	z-index: 9999999;
     position: relative;
@@ -527,15 +548,49 @@ dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('off
 		<h3>Bachelor of Science in Cybersecurity (BSCBS)</h3>
 <p>This highly technical cybersecurity undergraduate degree is intended to prepare graduates for a career in cybersecurity engineering, secure software development, cybersecurity test and evaluation, offensive security, systems architecture, reverse engineering, and/or emerging cybersecurity problem-solving.</p>
 <p>Graduates of the program will have a thorough understanding of modern computing systems from both a hardware and software perspective; be able to identify, investigate, and mitigate computing system vulnerabilities of various types; be able to design, deploy, and configure secure computing systems and software; understand cyber ethics, cyber policy and law, cyber risk management, and human behavior relating to computing systems and operations; be able to apply security principles and practices to the design and implementation of the physical, software, and human components of the system; and be able to analyze and evaluate cyber systems with respect to security and maintaining operations in the presence of risks and threats.</p>
-<p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://catalog.uah.edu/undergrad/colleges-departments/engineering/electrical-computer-engineering/cybersecurity/">View Catalog</a></p>
+<p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://www.uah.edu/eng/departments/ece/programs/undergraduate/cybersecurity">View Catalog</a></p>
 <p>&nbsp;<span style="color: #0077c8; font-size: 30px; font-weight: bold;">Master of Science in Cybersecurity (MSCBS)</span></p>
 <p>The MSCBS degree is an interdisciplinary program involving the Colleges of Business, Engineering, and Science. The program prepares graduates with the skills to secure and defend networks, recover from security failures, use computer forensics, and manage data security, leading to careers in the fast-growing field of information security.</p>
 <p>Please find the links to the available tracks below:</p>
-<ul>
-<li><a href="https://catalog.uah.edu/grad/colleges-departments/interdisciplinary-programs/cybersecurity-ms-interdisciplinary-computer-engineering-track/" target="_blank" rel="noopener">Engineering Track</a></li>
-<li><a href="https://catalog.uah.edu/grad/colleges-departments/interdisciplinary-programs/cybersecurity-ms-interdisciplinary-management-track/" target="_blank" rel="noopener">Management Track</a></li>
-<li><a href="https://catalog.uah.edu/grad/colleges-departments/interdisciplinary-programs/cybersecurity-ms-interdisciplinary-computer-science-track/" target="_blank" rel="noopener">Science Track</a></li>
-</ul>
+
+<div class="read-more" onclick="toggleSection('section1')">Engineering Track <i class="ico-chevron-down pull-right"></i></div>
+<div class="section" id="section1">
+    <div class="content" style="padding: 1%">
+      <p>The MS in Cybersecurity - Computer Engineering Track is a great choice for anyone who wants to specialize in cybersecurity and learn how to protect computer systems from cyber threats. The program provides students with the knowledge and skills needed to design and implement secure systems and networks. It also prepares students for leadership roles in the field of cybersecurity. </p>
+	  <p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://catalog.uah.edu/index.php#/programs/BJ3rZrHyh?bc=true&bcCurrent=Cybersecurity%20(MS)&bcGroup=College%20of%20Engineering&bcItemType=programs">View Catalog</a></p>
+	</div>
+</div>
+
+  <div class="read-more" onclick="toggleSection('section2')">Management Track <i class="ico-chevron-down pull-right"></i></div>
+  <div class="section" id="section2">
+    <div class="content" style="padding: 1%">
+      <p>The MSCBS in Cybersecurity teaches students how to manage information systems security effectively and efficiently. Courses cover topics such as network security, computer forensics, data security, and security failures. The program is accredited by the National Security Agency (NSA) and the Department of Homeland Security (DHS) and provides students with opportunities for real-world experience with leading companies and agencies in Huntsville.</p>
+	  <p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://catalog.uah.edu/index.php#/programs/ByWeM-BB12?bc=true&bcCurrent=Cybersecurity%20(MS)&bcGroup=College%20of%20Business&bcItemType=programs">View Catalog</a></p>
+	</div>
+  </div>
+
+  <div class="read-more" onclick="toggleSection('section3')">Science Track<i class="ico-chevron-down pull-right"></i></div>
+  <div class="section" id="section3">
+    <div class="content" style="padding: 1%">
+      <p>The MS in Cybersecurity - Computer Science Track prepares students for advanced work in the cybersecurity workforce, including advanced work in jobs such as Digital Forensic examiner, Security Engineer, IT auditor. Graduates of this program are able to identify weaknesses in computer and software systems and create cost-effective solutions to prevent security breaches. They understand advanced networks and security and will have a strong background in applied cryptography. Some students may work in reverse engineering or digital forensics or malware analysis or SCADA system security, among others.</p>
+	  <p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://catalog.uah.edu/index.php#/programs/rkH_bBHkn?bc=true&bcCurrent=Cybersecurity%20(MS)&bcGroup=College%20of%20Science&bcItemType=programs">View Catalog</a></p>
+	</div>
+  </div>
+
+    <script>
+    function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      const content = section.querySelector('.content');
+
+      if (section.style.height > 0 + 'px') {
+        // Close the section
+        section.style.height = 0;
+      } else {
+        // Open the section smoothly
+        section.style.height = content.clientHeight + 'px';
+      }
+    }
+  </script>
 <p><span style="text-decoration: underline;"><b>Program Level Learning Outcomes:</b></span></p>
 <ul>
 <li>Goal 1:&nbsp;MS-CBS graduates will understand basic cybersecurity management concepts and legal and ethical issues</li>
@@ -547,7 +602,7 @@ dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('off
 <h3>Graduate Certificate in Cybersecurity Studies</h3>
 <p>UAH's College of Business offers a graduate certificate program in cybersecurity studies designed to teach participants how to secure and defend networks, recover from security failures, use computer forensics, and manage data security.</p>
 <p>In addition to receiving a graduate certificate from UAH, students will also receive training to help them prepare for tests to qualify them for additional security certifications, such as Security+ and Certified Information Systems Security Professional (CISSP). Because it is a graduate program, credit hours earned in the information assurance program can also be applied toward a master’s degree.</p>
-<p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://www.uah.edu/business/grad/graduate-certificates/cyber-security">Learn More</a></p>
+<p style="text-align: center;"><a class="btn btn-sm btn-uah" href="https://catalog.uah.edu/index.php#/programs/rkZeM-SSJn?searchTerm=cybersecurity&bc=true&bcCurrent=Cybersecurity%20Studies%20(Graduate%20Certificate)&bcItemType=programs">Learn More</a></p>
 <div class="callout callout-warning">
 <p>Per the Department of Defense Directive 8570.1 (Information Assurance Training, Certification, and Workforce Management, August 2004), the Department of Defense now requires its information assurance personnel and those of contractors to hold certifications appropriate for the employee’s position.</p>
 </div>	</div>
@@ -622,7 +677,7 @@ dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('off
 								</div>
 								<div class="row">
 									<div id="footerContactUs" class="col-xs-12 col-sm-12 nopadding" style="">
-										<div class="address style="">
+										<div class="address style=">
 											The University of Alabama in Huntsville<br />
 											301 Sparkman Drive<br />
 											Huntsville, AL 35899
