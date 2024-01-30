@@ -210,6 +210,10 @@ div#uah50 {
 	flex-wrap: wrap;
 }
 
+.section {
+	  height: 0%; /* Set initial height to 0 */
+    }
+
 @media screen and (min-width: 1531px) {
 	div#uah50 {
 		padding-top: 15px;
@@ -451,11 +455,24 @@ div#uah50 {
 											   </dd>
 												  <dt class="level0 accordian nav-9132 notparent">
 											  <a href="camps.html"><span class="accordian-label">Camps</span></a><span class="accordian-expander"></span>  </dt>
-											<dd class="level0 accordian nav-9104 notparent">
-											   </dd>
-												  <dt class="active open level0 accordian nav-11463 notparent">
-											  <a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander"></span>  
+											  <dd class="level0  nav-6604 notparent">
+											</dd>
+											<dt class="active level0  nav-6611 parent open">
+													<a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  
 											</dt>
+											<dd class="active open level0 nav-6611 parent section" style="display: block; height:0px;" id="ProgramSection">
+												<!--New dl = new sublink-->
+												<dl id="offlajn-accordion-1157" class="level1" >
+															<dt class="level1 nav-6612 notparent">
+																<a href="ongoingPrograms.html"><span class="accordian-label">Ongoing</span></a><span class="accordian-expander"></span>  
+															</dt>
+												</dl>  
+												<dl id="offlajn-accordion-1157" class="level1" >
+													<dt class="level1 nav-6612 notparent">
+														<a href="archive.html"><span class="accordian-label">Archive</span></a><span class="accordian-expander"></span>  
+													</dt>
+												</dl>  
+											</dd>
 											<dd class="level0 accordian nav-5987 notparent">
 											   </dd>
 												  <dt class="level0 accordian nav-5988 notparent">
@@ -484,58 +501,26 @@ div#uah50 {
 											</dd>
 											<dt class="level0 accordian nav-5951 notparent ">
 										   <a href="labs.html"><span class="accordian-label">Labs</span></a><span class="accordian-expander"></span>  
-										   <dd class="level0  nav-6604 notparent">
-										</dd>
-										   <dt class="active level0  nav-6611 parent open">
-									   <a href=""><span class="accordian-label">Programs</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="active open level0  nav-6611 parent" style="height: 100%; display: block;">
-									  <dl id="offlajn-accordion-1157" class="level1">
-										   <dt class="level1 nav-6612 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/animation"><span class="accordian-label">Animation</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6612 notparent">
-										</dd>
-										   <dt class="level1 nav-10423 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/art-education"><span class="accordian-label">Art Education</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-10423 notparent">
-										</dd>
-										   <dt class="level1 nav-6614 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/art-history"><span class="accordian-label">Art History</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6614 notparent">
-										</dd>
-										   <dt class="level1 nav-6613 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/graphic-design"><span class="accordian-label">Graphic Design</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6613 notparent">
-										</dd>
-										   <dt class="level1 nav-6615 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/painting-drawing"><span class="accordian-label">Painting &amp; Drawing</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6615 notparent">
-										</dd>
-										   <dt class="level1 nav-6616 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/photography"><span class="accordian-label">Photography</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6616 notparent">
-										</dd>
-										   <dt class="level1 nav-6617 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/printmaking"><span class="accordian-label">Printmaking</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6617 notparent">
-										</dd>
-										   <dt class="level1 nav-6618 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/sculpture"><span class="accordian-label">Sculpture</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6618 notparent">
-										</dd>
-										   <dt class="level1 nav-6619 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/game-design-and-development-minor"><span class="accordian-label">Game Design and Development Minor</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6619 notparent">
-										</dd>
-										   <dt class="level1 nav-6620 notparent">
-									   <a href="https://www.uah.edu/ahs/departments/art/programs/web-communications"><span class="accordian-label">Web Communications Minor</span></a><span class="accordian-expander"></span>  </dt>
-									 <dd class="level1 nav-6620 notparent">
-										</dd>
-									   </dl>
-									 </dd>
-										 </dt>
+
+										</dt>
 	</dl>
 <script>
 dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('offlajn-accordion-928'), mode: 'onclick', interval: '500', level : 0})});
+
+//opens and closes the toggleable nav accordians. This shouldn't be how its done on the actual website but this is how I do it locally
+function toggleSection(sectionId) {
+      const section = document.getElementById(sectionId);
+
+	  //section.style.height = 0;
+      if (section.style.height > 0 + 'px') {
+        // Close the section
+        section.style.height = 0;
+      } else {
+        // Open the section smoothly
+        section.style.height = 100 + '%';
+      }
+    }
+
 </script>
 
 		</div>
