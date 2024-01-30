@@ -211,19 +211,8 @@ div#uah50 {
 }
 
 .section {
-      transition: height 0.7s ease;
-	  height: 100%; /* Set initial height to 0 */
+	  height: 0%; /* Set initial height to 0 */
     }
-
-    /* Style for the "Read More" link */
-    .read-more {
-		
-    }
-
-	.content
-	{
-		color: green;
-	}
 
 @media screen and (min-width: 1531px) {
 	div#uah50 {
@@ -466,11 +455,24 @@ div#uah50 {
 											   </dd>
 												  <dt class="level0 accordian nav-9132 notparent">
 											  <a href="camps.html"><span class="accordian-label">Camps</span></a><span class="accordian-expander"></span>  </dt>
-											<dd class="level0 accordian nav-9104 notparent">
-											   </dd>
-												  <dt class="active open level0 accordian nav-11463 notparent">
-											  <a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander"></span>  
+											  <dd class="level0  nav-6604 notparent">
+											</dd>
+											<dt class="active level0  nav-6611 parent open">
+													<a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  
 											</dt>
+											<dd class="active open level0 nav-6611 parent section" style="display: block; height:0px;" id="ProgramSection">
+												<!--New dl = new sublink-->
+												<dl id="offlajn-accordion-1157" class="level1" >
+															<dt class="level1 nav-6612 notparent">
+																<a href="ongoingPrograms.html"><span class="accordian-label">Ongoing</span></a><span class="accordian-expander"></span>  
+															</dt>
+												</dl>  
+												<dl id="offlajn-accordion-1157" class="level1" >
+													<dt class="level1 nav-6612 notparent">
+														<a href="archive.html"><span class="accordian-label">Archive</span></a><span class="accordian-expander"></span>  
+													</dt>
+												</dl>  
+											</dd>
 											<dd class="level0 accordian nav-5987 notparent">
 											   </dd>
 												  <dt class="level0 accordian nav-5988 notparent">
@@ -499,18 +501,7 @@ div#uah50 {
 											</dd>
 											<dt class="level0 accordian nav-5951 notparent ">
 										   <a href="labs.html"><span class="accordian-label">Labs</span></a><span class="accordian-expander"></span>  
-										   <dd class="level0  nav-6604 notparent">
-										</dd>
-										   <dt class="active level0  nav-6611 parent open">
-									   		     <a href="labs.html"><span class="accordian-label">Programs</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  
-									       </dt>
-									 	<dd class="active open level0 nav-6611 parent" style="display: block; height:0px;" id="ProgramSection">
-											  <dl id="offlajn-accordion-1157" class="level1" >
-														<dt class="level1 nav-6612 notparent">
-															<a href="https://www.uah.edu/ahs/departments/art/programs/animation"><span class="accordian-label">Animation</span></a><span class="accordian-expander"></span>  
-														</dt>
-											  </dl>
-									    </dd>
+
 										</dt>
 	</dl>
 <script>
