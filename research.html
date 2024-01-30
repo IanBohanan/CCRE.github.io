@@ -519,16 +519,16 @@ dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('off
 function toggleSection(sectionId) {
       const section = document.getElementById(sectionId);
 
-	  section.style.height = 0;
+	  //section.style.height = 0;
 
-	  /*
+	  
       if (section.style.height > 0 + 'px') {
         // Close the section
         section.style.height = 0;
       } else {
         // Open the section smoothly
-        section.style.height = content.clientHeight + 'px';
-      }*/
+        section.style.height = 100 + '%';
+      }
     }
 
 </script>
