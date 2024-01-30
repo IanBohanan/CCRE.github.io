@@ -502,9 +502,10 @@ div#uah50 {
 										   <dd class="level0  nav-6604 notparent">
 										</dd>
 										   <dt class="active level0  nav-6611 parent open">
-									   <a href=""><span class="accordian-label">Programs</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  </dt>
-									 	<dd class="active open level0 nav-6611 parent" style="display: block;" id="ProgramSection">
-												<dl id="offlajn-accordion-1157" class="level1 section"  >
+									   		     <a href="labs.html"><span class="accordian-label">Programs</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  
+									       </dt>
+									 	<dd class="active open level0 nav-6611 parent" style="display: block; height:0px;" id="ProgramSection">
+											  <dl id="offlajn-accordion-1157" class="level1" >
 														<dt class="level1 nav-6612 notparent">
 															<a href="https://www.uah.edu/ahs/departments/art/programs/animation"><span class="accordian-label">Animation</span></a><span class="accordian-expander"></span>  
 														</dt>
@@ -520,8 +521,6 @@ function toggleSection(sectionId) {
       const section = document.getElementById(sectionId);
 
 	  //section.style.height = 0;
-
-	  
       if (section.style.height > 0 + 'px') {
         // Close the section
         section.style.height = 0;
