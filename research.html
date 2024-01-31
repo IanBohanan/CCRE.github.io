@@ -458,9 +458,9 @@ div#uah50 {
 											  <dd class="level0  nav-6604 notparent">
 											</dd>
 											<dt class="active level0  nav-6611 parent open">
-													<a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander read-more" onclick="toggleSection('ProgramSection')"></span>  
+													<a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander read-more" onclick="expandAccordian('ProgramSection')"></span>  
 											</dt>
-											<dd class="active open level0 nav-6611 parent section" style="display: block; height:0px;" id="ProgramSection">
+											<dd class="active open level0 nav-6611 parent" style="display: block; height:0px;" id="ProgramSection">
 												<!--New dl = new sublink-->
 												<dl id="offlajn-accordion-1157" class="level1" >
 															<dt class="level1 nav-6612 notparent">
@@ -508,7 +508,7 @@ div#uah50 {
 dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('offlajn-accordion-928'), mode: 'onclick', interval: '500', level : 0})});
 
 //opens and closes the toggleable nav accordians. This shouldn't be how its done on the actual website but this is how I do it locally
-function toggleSection(sectionId) {
+function expandAccordian(sectionId) {
       const section = document.getElementById(sectionId);
 
 	  //section.style.height = 0;
