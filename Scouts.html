@@ -399,29 +399,47 @@ div#uah50 {
 						<div class="menu accordian">
 									<div class="moduletable">
 
-		
-						<dl  id="offlajn-accordion-928"  class="level0 accordian">
+										<dl  id="offlajn-accordion-928"  class="level0 accordian">
 											<dt class="level0"><span class="accordian-label"><a href="https://www.uah.edu/ccre">Center for Cybersecurity Research and Education</a></span></dt>      
-											<dt class="level0 accordian nav-5951 notparent ">
-											  <a href="academics.html"><span class="accordian-label">Academics</span></a><span class="accordian-expander"></span>  </dt>
+											<dt class="level0 accordian nav-5987 notparent ">
+											  <a href="academics.html"><span class="accordian-label">Academics</span></a><span class="accordian-expander"></span>  
+											</dt>
 											<dd class="level0 accordian nav-5951 notparent">
 											   </dd>
 												  <dt class="level0 accordian nav-5951 notparent">
 											  <a href="idea-committee.html"><span class="accordian-label">IDEA Committee</span></a><span class="accordian-expander"></span>  
-											</dt>
+												 </dt>
+												 <dd class="level0 accordian nav-6194 notparent">
+												</dd>
+												   <dt class="level0 accordian nav-9132 notparent">
+											   <a href="camps.html"><span class="accordian-label">Camps</span></a><span class="accordian-expander"></span>  </dt>
+												 <dd class="level0 accordian nav-11463 notparent">
+												</dd>
+												<dt class="level0 accordian nav-5951 notparent ">
+											   	<a href="labs.html"><span class="accordian-label">Cybersecurity Labs</span></a><span class="accordian-expander"></span>  
+											   </dt>
 											<dd class="level0 accordian nav-11463 notparent">
 											   </dd>
 													<dt class="level0 accordian nav-6194 notparent">
-											  <a href="https://www.uah.edu/ccre/cybersecurity-scholarships"><span class="accordian-label">Cybersecurity Scholarships</span></a><span class="accordian-expander"></span>  
+											  <a href="https://www.uah.edu/ccre/cybersecurity-scholarships"><span class="accordian-label">Cybersecurity Scholarships</span></a><span class="accordian-expander"></span>  </dt>
+											  <dd class="level0  nav-6604 notparent">
+											</dd>
+											<dt class="level0  nav-6611 parent">
+													<a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander read-more" onclick="expandAccordian('ProgramSection')"></span>  
 											</dt>
-											<dd class="level0 accordian nav-6194 notparent">
-											   </dd>
-												  <dt class="level0 accordian nav-9132 notparent">
-											  <a href="camps.html"><span class="accordian-label">Camps</span></a><span class="accordian-expander"></span>  </dt>
-											<dd class="level0 accordian nav-9104 notparent">
-											   </dd>
-												  <dt class="level0 accordian nav-5987 notparent">
-											  <a href="research.html"><span class="accordian-label">Research</span></a><span class="accordian-expander"></span>  </dt>
+											<dd class="level0 nav-6611 parent" style="display: block; height:0px;" id="ProgramSection">
+												<!--New dl = new sublink-->
+												<dl id="offlajn-accordion-1157" class="level1" >
+															<dt class="level1 nav-6612 notparent">
+																<a href="ongoingPrograms.html"><span class="accordian-label">Ongoing</span></a><span class="accordian-expander"></span>  
+															</dt>
+												</dl>  
+												<dl id="offlajn-accordion-1157" class="level1" >
+													<dt class="level1 nav-6612 notparent">
+														<a href="archive.html"><span class="accordian-label">Archive</span></a><span class="accordian-expander"></span>  
+													</dt>
+												</dl>  
+											</dd>
 											<dd class="level0 accordian nav-5987 notparent">
 											   </dd>
 												  <dt class="level0 accordian nav-5988 notparent">
@@ -446,16 +464,25 @@ div#uah50 {
 											   </dd>
 												  <dt class="level0 accordian nav-9131 notparent">
 											  <a href="https://www.uah.edu/ccre/contact-us"><span class="accordian-label">Contact</span></a><span class="accordian-expander"></span>  </dt>
-											<dd class="level0 accordian nav-9131 notparent">
-											   </dd>
-											<dd class="level0 accordian nav-11463 notparent">
-											</dd>
-											<dt class="level0 accordian nav-11463 notparent">
-										   <a href="labs.html"><span class="accordian-label">Labs</span></a><span class="accordian-expander"></span>  
-										 </dt>
+										</dt>
 	</dl>
 <script>
 dojo.addOnLoad(function(){var accordion = new WWAccordion({node : dojo.byId('offlajn-accordion-928'), mode: 'onclick', interval: '500', level : 0})});
+
+//opens and closes the toggleable nav accordians. This shouldn't be how its done on the actual website but this is how I do it locally
+function expandAccordian(sectionId) {
+      const section = document.getElementById(sectionId);
+
+	  //section.style.height = 0;
+      if (section.style.height > 0 + 'px') {
+        // Close the section
+        section.style.height = 0;
+      } else {
+        // Open the section smoothly
+        section.style.height = 100 + '%';
+      }
+    }
+
 </script>
 
 		</div>
