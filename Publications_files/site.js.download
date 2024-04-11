@@ -1,0 +1,941 @@
+jQuery.noConflict();
+(function($) {
+    $(function() {
+        if (/iPhone|iPod|Android|iPad/.test(window.navigator.platform)) {
+            $(document).on('focus', 'textarea,input,select', function(e) {
+                $('header').css('position', 'absolute');
+            }).on('blur', 'textarea,input,select', function(e) {
+                $('header').css('position', '');
+            });
+        }
+
+        if (/Windows/.test(window.navigator.userAgent)) {
+            $('html').removeClass('touch');
+        }
+
+        $('.hero-carousel > :first-child').addClass('active');
+
+        var numberWords = new Array("one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
+
+        $('.solid-tile-item').each(function(i, obj) {
+            $(this).addClass(numberWords[i]);
+
+        });
+
+        if ($('.solid-tile-items').length > 0) {
+            var CTAsMoved = false;
+            //$(window).resize(function() {
+                if (Modernizr.mq('only all and (min-width: 990px)')) {
+                    $('.solid-tile-items').waypoint(function(direction) {
+
+                        if (direction === 'down') {
+
+                            // Move CTAs when scrolling down first time
+                            if (CTAsMoved === false) {
+
+                                CTAsMoved = true;
+                                var $this = $(this);
+
+                                // Move CTAs DOM element into Next Steps
+                                var CTAsWidth = $('.ctas').outerWidth();
+                                var CTAsOffsetTop = $('.ctas').offset().top;
+
+                                $('.ctas').addClass('dommove').appendTo($('.solid-tile-items')).css({
+                                    'width': CTAsWidth + 'px',
+                                    'left': $(window).width() - $('.solid-tile-items').offset().left - CTAsWidth,
+                                    'top': CTAsOffsetTop - $('.solid-tile-items').offset().top
+                                }).animate({
+                                    top: 0
+                                }, 200, function() {
+                                    // Get position of each Next Step
+                                    var CTAsOffsetLeft = $('.ctas').offset().left;
+                                    var $onetop = $this.find('.yellow.one .inner').offset().top - $('.ctas li:eq(0)').offset().top;
+                                    var $oneleft = $this.find('.yellow.one').offset().left - CTAsOffsetLeft;
+                                    var $threetop = $this.find('.yellow.three .inner').offset().top - $('.ctas li:eq(2)').offset().top;
+                                    var $threeleft = $this.find('.yellow.three').offset().left - CTAsOffsetLeft;
+                                    var $fivetop = $this.find('.yellow.five .inner').offset().top - $('.ctas li:eq(1)').offset().top;
+                                    var $fiveleft = $this.find('.yellow.five').offset().left - CTAsOffsetLeft;
+                                    // Move CTAs into position
+                                    $('.ctas li:eq(0)').removeClass('fade').addClass('move').animate({
+                                        left: $oneleft,
+                                        top: $onetop
+                                    }, 1000, function() {
+                                        $(this).removeClass('move').addClass('fade');
+                                        $this.find('.yellow.one').addClass('show');
+                                        $this.find('.blue.two').addClass('show');
+                                    });
+                                    timer1 = setTimeout(function() {
+                                        $('.ctas li:eq(1)').removeClass('fade').addClass('move').animate({
+                                            left: $fiveleft,
+                                            top: $fivetop
+                                        }, 1000, function() {
+                                            $(this).removeClass('move').addClass('fade');
+                                            $this.find('.yellow.five').addClass('show');
+                                            $this.find('.blue.six').addClass('show');
+                                        });
+                                    }, 300);
+                                    timer2 = setTimeout(function() {
+                                        $('.ctas li:eq(2)').removeClass('fade').addClass('move').animate({
+                                            left: $threeleft,
+                                            top: $threetop
+                                        }, 1000, function() {
+                                            $(this).removeClass('move').addClass('fade');
+                                            $this.find('.yellow.three').addClass('show');
+                                            $this.find('.blue.four').addClass('show');
+                                        });
+                                    }, 600);
+
+                                });
+
+                                // Just hide CTAs when scrolling down subsequent times
+                            } else {
+                                $('.ctas li').addClass('fade');
+                            }
+                        }
+                    }, {
+                        offset: function() {
+                            return $(window).height() / 2;
+                        }
+                    });
+
+                    // Show CTAs when scrolling up
+                    $('.solid-tile-items').waypoint(function(direction) {
+                        if (direction === 'up') {
+                            $('.ctas').removeAttr('style').removeClass('dommove').appendTo($('.topstrip .innerwrap'));
+                            $('.ctas li').stop(true, true).removeAttr('style').removeClass('fade');
+                            $(this).find('.yellow, .blue').addClass('show');
+                            clearTimeout(timer1);
+                            clearTimeout(timer2);
+                        }
+                    }, {
+                        offset: function() {
+                            return $(window).height();
+                        }
+                    });
+                }
+            //});
+        }
+
+        $('.ctas li').attrchange({
+            trackValues: true,
+            // set to true so that the event object is updated with old & new values
+            callback: function(evnt) {
+                if (evnt.attributeName == "class") { // which attribute you want to watch for changes
+                    var $el = $(this);
+                    if (evnt.newValue.search(/fade/i) == -1) {
+                        $el.attr('style', 'display:block !important');
+                    } else {
+                        setTimeout(function() {
+                            if ($el.hasClass('fade')) {
+                                $el.attr('style', 'display:none !important');
+                            }
+                        }, 1000);
+                    }
+                }
+            }
+        });
+
+        $('.ctas a').attrchange({
+            trackValues: true,
+            // set to true so that the event object is updated with old & new values
+            callback: function(evnt) {
+                if (evnt.attributeName == "class") {
+                    var $el = $(this);
+                    if (evnt.newValue.search(/fade/i) == -1) {
+                        $el.attr('style', 'display:block !important');
+                    } else {
+                        setTimeout(function() {
+                            if ($el.hasClass('fade')) {
+                                $el.attr('style', 'display:none !important');
+                            }
+                        }, 1000);
+                    }
+                }
+            }
+        });
+
+        $('.solid-tiles-inner .inner:eq(0)').wrap('<a href="/admissions"></a>');
+        $('.solid-tiles-inner .inner:eq(2)').wrap('<a href="/request-info"></a>');
+        $('.solid-tiles-inner .inner:eq(4)').wrap('<a href="/admissions/undergraduate/discover-uah/visit-campus"></a>');
+
+        //animation code
+        if ($('.module-hero4').length > 0) {
+            var tile0 = $(this).find('.cover .tile:eq(0)');
+            var tile1 = $(this).find('.cover .tile:eq(1)');
+            var tile2 = $(this).find('.cover .tile:eq(2)');
+            var tile3 = $(this).find('.cover .tile:eq(3)');
+            var tile4 = $(this).find('.cover .tile:eq(4)');
+            var tile5 = $(this).find('.cover .tile:eq(5)');
+            $('.module-hero4').waypoint(function() {
+                $(tile0).addClass('fade');
+                setTimeout(function() {
+                    $(tile5).addClass('fade');
+                }, 225);
+                setTimeout(function() {
+                    $(tile3).addClass('fade');
+                }, 450);
+                setTimeout(function() {
+                    $(tile2).addClass('fade');
+                }, 675);
+                setTimeout(function() {
+                    $(tile1).addClass('fade');
+                }, 900);
+                setTimeout(function() {
+                    $(tile4).addClass('fade');
+                }, 1125);
+            }, {
+                offset: function() {
+                    return $(window).height() / 2;
+                }
+            });
+        }
+
+        //LEFT ACCORDION
+        $('.accordion li .hitbox').click(function(aev) {
+            aev = aev || window.event;
+            var atarget = aev.target || aev.srcElement;
+            var parent = $(atarget).parent();
+            var options = parent.children('.options');
+
+            if ($(atarget).hasClass("selected")) {
+                $(atarget).removeClass("selected");
+                parent.find('.hitbox').removeClass("selected");
+                parent.find('.options').hide();
+                parent.find('.menu-toggle-v').show();
+
+                options.css({
+                    "height": "0",
+                    "opacity": "0"
+                });
+            } else {
+                $(atarget).addClass("selected");
+                parent.children('label').children('.box').children('.menu-toggle-v').hide();
+                options.show();
+                options.css({
+                    "height": "auto",
+                });
+
+                options.animate({
+                    opacity: 1,
+                    height: "auto"
+                }, 200, function() {
+                    // Animation complete.
+                });
+            }
+
+        });
+
+        //handle parent + - when child is active on pageload and expand children
+        $(".parent").each(function() {
+            var current = $(this);
+            if (current.hasClass("active")) {
+                current.children('label').children('.box').children('.menu-toggle-v').hide();
+                current.children('.hitbox').addClass("selected");
+
+            }
+            if (current.hasClass("active") && current.hasClass("current")) {
+                current.children('.options').show();
+                current.children('.options').css({
+                    "height": "auto",
+                    "opacity": "1"
+                });
+            }
+        });
+
+        //TOGGLE LEFT NAV FUNCTION
+
+
+        function toggleLeftNav(e) {
+            e.preventDefault();
+            $('.left-col').toggleClass('open');
+            $('.mobile-section-nav').toggleClass('open');
+            $('.left-col-close-box').toggleClass('open');
+            if ($('.left-col').hasClass('open')) {
+                $('body').addClass('noscroll');
+            } else {
+                $('body').removeClass('noscroll');
+            }
+        }
+
+        // Collapsed nav
+        $(window).scroll(function() {
+            if ($('.uk-offcanvas-page').length == 0) {
+                $x = $('header').height();
+                if ($(window).scrollTop() > $x) {
+                    $('header').addClass('collapsed');
+                } else {
+                    $('header').removeClass('collapsed');
+                }
+            }
+        });
+
+        //fixing head sliding back in nicely
+        $('.uk-offcanvas').on('click', function(e) {
+            if (!$(e.target).hasClass('uk-offcanvas')) return;
+            $('header').bind('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function(event) {
+                $(this).removeAttr('style');
+                $(this).unbind(event);
+            });
+            $('header').css('margin-left', '0');
+        });
+
+        //HIDE LEFT NAV ON MOBILE-NAV CLICK
+        $('.navbar-toggle').on('click', function(e) {
+            if ($('.mobile-section-nav').hasClass('open')) {
+                toggleLeftNav(e);
+            }
+        });
+
+        //Mobile Search push content down
+        $('.mobile-search').on('click', function(e) {
+            var mainHolder = $('#main');
+            var currentMainPadding = parseInt(mainHolder.css("padding-top"));
+            var newMainPadding = currentMainPadding;
+            if ($('#search').is(':visible')) {
+                newMainPadding = currentMainPadding - 42;
+            } else {
+                newMainPadding = currentMainPadding + 42;
+            }
+            if ($('.mobile-section-nav').hasClass('open')) {
+                toggleLeftNav(e);
+            }
+            mainHolder.animate({
+                "padding-top": newMainPadding + "px"
+            });
+        });
+
+        // Nav open
+        $('.hitpad').on('click', function(e) {
+            toggleLeftNav(e);
+            //shut search
+            if ($('#search').is(':visible')) {
+                var mainHolder = $('#main');
+                var currentMainPadding = parseInt(mainHolder.css("padding-top"));
+                var newMainPadding = currentMainPadding - 42;
+                mainHolder.animate({
+                    "padding-top": newMainPadding + "px"
+                });
+                $('#search').toggleClass('in');
+            }
+        });
+        $('.left-col-close-box').on('click', function(e) {
+            toggleLeftNav(e);
+        });
+
+        // Select Box open
+        $('.audience-toggle').on('click', function(e) {
+            e.preventDefault();
+            $('.audience-options').toggleClass('open');
+        });
+
+        //toggle research buttons
+        $('.togglers').on('click', function(e) {
+            e.preventDefault();
+            $('.togglers').toggleClass('closed');
+        });
+        // Research filter hiders
+        // Add onclick handler to checkbox w/id checkme
+        $("#group1box").click(function() {
+            // If checked
+            if ($("#group1box").is(":checked")) {
+                //show the hidden div
+                $("#group1").show("fast");
+            } else {
+                //otherwise, hide it
+                $("#group1").hide("fast");
+            }
+        });
+
+        // Add onclick handler to checkbox w/id checkme
+        $("#group2box").click(function() {
+            // If checked
+            if ($("#group2box").is(":checked")) {
+                //show the hidden div
+                $("#group2").show("fast");
+            } else {
+                //otherwise, hide it
+                $("#group2").hide("fast");
+            }
+        });
+
+        $("body").click(function(ev) {
+            ev = ev || window.event;
+            var target = ev.target || ev.srcElement;
+            if ($(target).hasClass('popover-item') || $(target).hasClass('icon-mappin') || $(target).hasClass('popover-content') || $(target).hasClass('popover-title') || $(target).is('circle') || $(target).is('path')) {} else {
+                $('.popover-item').popover('hide');
+            }
+        });
+
+        //fire actions on load and resize
+        $(window).on('load resize', function() {
+            $('.popover-item').popover({
+                html: true,
+                placement: 'auto'
+            });
+
+            $('.popover-item').click(function() {
+                $('.popover-item').not(this).popover('hide');
+            });
+            var phonetoggle = $('.twoblocks.explore .blocks-holder .content p .btn-uah').css('display');
+            if (phonetoggle == 'block') {
+                // destroy popover on mobile
+                //$('.popover-item').popover('destroy');
+            }
+
+        });
+
+        $('.explore').click(function() {
+            //check if under 700 by looknig for full map btn block
+            var phonetoggle = $('.twoblocks.explore .blocks-holder .content p .btn-uah').css('display');
+            if (phonetoggle == 'block') {
+                //window.location.href = "http://google.com";
+            }
+        });
+
+        $('#hero-slides').carousel();
+
+        // flipping tiles on hover - .slice removes first child
+        $('.hero-tile-item').slice(1).on("mouseover", function(el) {
+            $(this).addClass('active');
+
+        });
+
+        // .slice removes first child
+        $('.hero-tile-item').slice(1).on("mouseout", function(el) {
+            $(this).removeClass('active');
+        });
+
+        var equalheight = function(container) {
+
+            var currentTallest = 0,
+                currentRowStart = 0,
+                rowDivs = new Array(),
+                $el, topPosition = 0;
+
+            $(container).each(function() {
+                $el = $(this);
+                $($el).height('auto')
+                topPostion = $el.position().top;
+                if (currentRowStart != topPostion) {
+                    for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+                        rowDivs[currentDiv].height(currentTallest);
+                    }
+                    rowDivs.length = 0; // empty the array
+                    currentRowStart = topPostion;
+                    currentTallest = $el.height();
+                    rowDivs.push($el);
+                } else {
+                    rowDivs.push($el);
+                    currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+                }
+                for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+                    rowDivs[currentDiv].height(currentTallest);
+                }
+            });
+        }
+
+        $(window).load(function() {
+            equalheight('.hero-items .hero-item');
+        });
+
+        $(window).resize(function() {
+            equalheight('.hero-items .hero-item');
+            if (Modernizr.mq('only all and (min-width: 990px)')) {
+                jQuery.UIkit.offcanvas.hide('#uah-offcanvas-menu');
+                $('body').removeAttr('style');
+            }
+        });
+
+        $(window).load(function() {
+            equalheight('.hero-row > div');
+        });
+
+        $(window).load(function() {
+            //on the homepage only remove the second <div id="articleBody"
+            jQuery('.item-pagehome #articleBody').remove();
+        });
+
+        $(window).resize(function() {
+            equalheight('.hero-row > div');
+            if (jQuery(window).width() < 500) {
+                jQuery('.masonry-brick').css('width', '100%');
+                jQuery('.masonry-brick').css('padding-right', '0');
+            } else if (jQuery(window).width() < 970) {
+                jQuery('.masonry-brick').css('width', '50%');
+                jQuery('.masonry-brick').css('padding-right', '25px');
+            } else {
+                jQuery('.masonry-brick').css('width', '33.3333%');
+                jQuery('.masonry-brick').css('padding-right', '25px');
+            }
+        });
+
+        $("[data-toggle='tooltip']").tooltip({
+            html: true,
+            placement: 'auto'
+        });
+
+        $('[data-jmodtip]').each(function() {
+            $(this).attr('data-jmodtip', '');
+        });
+
+        function bcfix() {
+            $('ul.breadcrumb li:nth-child(1)').css('width', 0);
+            if ($(window).width() > 989) {
+                $('ul.breadcrumb li:nth-child(1)').css('margin-left', '-8px');
+                $('ul.breadcrumb li:nth-child(1)').css('padding', 0);
+            } else {
+                $('ul.breadcrumb li:nth-child(1)').css('padding', '8px 0 8px 8px');
+                $('ul.breadcrumb li:nth-child(1)').css('margin-left', 0);
+            }
+        }
+
+        //Responsive Breadcrumbs
+        $('#breadcrumbs').rcrumbs({
+            callback: {
+                postCrumbsListDisplay: function() {
+                    bcfix();
+                    setTimeout(function() {
+                        bcfix();
+                    }, 100);
+                    setTimeout(function() {
+                        bcfix();
+                    }, 200);
+                    setTimeout(function() {
+                        bcfix();
+                    }, 500);
+                    setTimeout(function() {
+                        bcfix();
+                    }, 1000);
+                }
+            }
+        });
+
+        //HoverIntent
+        $('.childcontent').css('opacity', 0);
+        $('.megamenu > li').hover(function() {
+            var $li = $(this);
+            $li.attr('data-hovering', 'true');
+            setTimeout(function() {
+                if ($li.attr('data-hovering') == 'true') {
+                    $('.haschild:hover > .childcontent').show();
+                    $li.find('.childcontent').animate({
+                        opacity: 1
+                    }, 400);
+                }
+            }, 400);
+        }, function() {
+            var $li = $(this);
+            $li.attr('data-hovering', 'false');
+            $li.find('.childcontent').css('opacity', 0);
+        });
+        $('.megamenu > li > .childcontent').hover(function() {
+            if ($(this).css('opacity') == 0) {
+                $('.megamenu > li').attr('data-hovering', 'false');
+                $('.haschild:hover > .childcontent').hide();
+            }
+        });
+
+        //HoverTap
+        $('html.touch .megamenu > li').on('click', function(event) {
+            var $li = $(this);
+            if ($li.attr('data-tapped') == 'true') {
+                $li.attr('data-tapped', 'false');
+                $li.mouseleave();
+            } else {
+                event.preventDefault();
+                event.stopPropagation();
+                $li.attr('data-tapped', 'true');
+                $li.mouseenter();
+            }
+        });
+
+        // Make iframes responsive with FlexEmbed
+//        $('iframe').each(function(index) {
+//            var $iframe = $(this);
+            // Ignore these sites for FlexEmbed
+//            if (!$iframe.parent().is('code') && ($iframe.attr('src').toLowerCase().indexOf('google') == -1) && ($iframe.attr('src').toLowerCase().indexOf('wufoo') == -1) && ($iframe.attr('src').toLowerCase().indexOf('mapchannels') == -1) && ($iframe.attr('src').toLowerCase().indexOf('ytchannelembed') == -1) && ($iframe.attr('src').toLowerCase().indexOf('twitter') == -1) && ($iframe.attr('src').toLowerCase().indexOf('facebook') == -1) && ($iframe.attr('src').toLowerCase().indexOf('admissions/forms') == -1) && ($iframe.attr('src').toLowerCase().indexOf('matchinggifts.com') == -1) && ($iframe.attr('src').toLowerCase().indexOf('amazonaws') == -1) && ($iframe.attr('src').toLowerCase().indexOf('osp.uah.edu') == -1) && ($iframe.attr('src').toLowerCase().indexOf('eventbrite') == -1) && ($iframe.attr('src').toLowerCase().indexOf('uah.co1.qualtrics.com') == -1)) {
+//                $iframe.addClass('vframe');
+//            }
+//        });
+//        $('.vframe').wrap('<div class="FlexEmbed"><div class="FlexEmbed-content"></div></div>');
+//        $('.FlexEmbed').prepend('<div class="FlexEmbed-ratio" style="padding-bottom:56.25%"></div>');
+//        $('.vframe').css('width', '100%');
+//        $('.vframe').css('height', '100%');
+//        $(window).resize(function() {
+//            $('.vframe').attr('src', function(i, val) {
+//                return val;
+//            });
+//        });
+
+        $('a').each(function() {
+            var href = $(this).attr('href') || '';
+            if (href == '#') {
+                $(this).attr('href', 'javascript:');
+            } else if (href.substr(0, 1) == '#') {
+                var location = window.location.href;
+                if (location.indexOf('#') != -1) {
+                    location = location.substring(0, location.indexOf('#'));
+                }
+                if (location.substr(-1) == '/') {
+                    location = location.substr(0, location.length - 1);
+                }
+                $(this).attr('href', location + href);
+            }
+        });
+
+        $(document).on('touchmove', function(evt) {
+            if ($('body').hasClass('noscroll')) {
+                evt.preventDefault();
+            }
+        });
+
+        $(document).on('touchmove', '.accordian', function(evt) {
+            if ($('body').hasClass('noscroll')) {
+                evt.stopPropagation()
+            }
+        });
+
+        $('.tablesorter').tablesorter();
+
+        $(function() {
+            if ($('.dropdown-menu').children('li').length == 0) {
+                $('.dropdown-toggle').hide();
+            }
+
+            $('a[href*=#]:not([href=#]):not([href*=carousel])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top - $('header').height()
+                        }, 500);
+                        return false;
+                    }
+                }
+            });
+            var target = location.href.split('#')[1];
+            if (target) {
+                target = $('#' + target).length ? $('#' + target) : $('[name=' + target + ']');
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - $('header').height()
+                    }, {
+                        duration: 500,
+                        step: function(now, fx) {
+                            if (fx.end < (target.offset().top - $('header').height())) {
+                                $(this).stop().animate({
+                                    scrollTop: target.offset().top - $('header').height()
+                                }, 500);
+                            }
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
+        function fixCols() {
+            $('.multi').each(function() {
+                var multi = $(this);
+                var multiWidth = multi.outerWidth();
+                var colWidth = multi.find('[class*="col-"]').first().outerWidth();
+                var rowSize = Math.round(multiWidth / colWidth);
+                var cols = multi.find('[class*="col-"]');
+                var chunks = [];
+
+                while (cols.length > 0 && rowSize > 0) {
+                  chunk = cols.splice(0, rowSize);
+                  chunks.push(chunk);
+                }
+
+                chunks.forEach(function(chunk) {
+                    chunk.forEach(function(col) {
+                        var col = $(col);
+                        col.css('min-height', '1px');
+                    });
+                });
+
+                chunks.forEach(function(chunk) {
+                    var maxHeight = 0;
+
+                    chunk.forEach(function(col) {
+                        var col = $(col);
+                        maxHeight = (col.outerHeight() > maxHeight) ? col.outerHeight() : maxHeight;
+                    });
+
+                    maxHeight++;
+
+                    chunk.forEach(function(col) {
+                        var col = $(col);
+                        col.css('min-height', maxHeight + 'px');
+                    });
+                });
+                
+            });
+        }
+
+        $(window).on('load resize', function() {
+            fixCols();
+        });
+
+        fixCols();
+        $(window).resize();
+
+        //uah/responsive-tables
+
+        //Loop through all tags with a class of .table.
+        $('.table').not('code .table').each(function() {
+            //Find the first row of the table.
+            var head = [], $table = $(this), $row = $table.find('tr:first');
+            if ($table.hasClass('table-sort')) {
+                //Enable table sorting.
+                $table.tablesorter();
+            }
+            //Check if table should be searchable.
+            if ($table.hasClass('table-search')) {
+                //Add search input before div wrapper.
+                $table.parent().before('<div class="clearfix"><input class="search-table" type="text" name="Search Table" placeholder="SEARCH TABLE" /></div>');
+            }
+            //Find all th tags in the first row.
+            $row.find('th').each(function() {
+                var $cell = $(this);
+                //Add 'scope="col"' to all th tags in the first row.
+                $cell.attr('scope', 'col');
+                head.push($cell.text());
+            });
+            //Find the rest of the rows.
+            var $rows = $table.find('tr:not(:first)');
+            
+            // get the header row for the table
+            var $headerrow = $table.find('tr:first');
+            
+            //Loop through each row.
+            $rows.each(function() {
+                var index = 0, $row = $(this);
+                //Find all th and td tags in this row.
+                $row.find('th,td').each(function() {
+                    var $cell = $(this);
+                    
+                    // get the th that corresponds to the td
+                    var $headercell = $headerrow.find('th').eq(index);
+                    
+                    // if the corresponding th has an attribute set for data-th
+                    if ($headercell.attr('data-th'))
+                    {
+                        // assign the td the same data-th attribute
+                        $cell.attr('data-th', $headercell.attr('data-th'));
+                    }
+                    // if the corresponding th does not have an attribute set for data-th
+                    else
+                    {
+                        // assign the td a data-th attribute based on the text of the corresponding th
+                        $cell.attr('data-th', head[index]);
+                    }
+                    index++;
+                });
+                //Find the first th or td tag and set 'scope="row"' on it.
+                $row.find('th,td').eq(0).attr('scope', 'row');
+            });
+        });        
+        //Loop through all tags with a class of .table ignoring those with a class .table-xs-fixed or class .table-xs-stack.
+        $('.table').not('code .table').not('.table-xs-fixed').not('.table-xs-stack').each(function() {
+            $table = $(this);
+            //Check if table has already been wrapped with div.
+            if (!$table.parent().hasClass('table-responsive')) {
+                //Wrap the table with the responsive wrapper div.
+                $table.wrap('<div class="table-responsive"></div>');
+            }
+        });
+        //Watch for changes to the search input.
+        $('.search-table').on('input', function(e) {
+            var needle = $(this).val();
+            $('tbody tr').each(function(index) {
+                var hidden = true;
+                if (index === 0) return;
+                $(this).children('td').each(function() {
+                    if ($(this).text().toLowerCase().indexOf(needle.toLowerCase()) != -1) {
+                        hidden = false;
+                        return;
+                    }
+                });
+                if (hidden) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+        //Notify any listeners that the table is loaded
+        $(document).trigger('responsive-tables:loaded');
+
+        //uah/responsive-tables
+
+        //button tabs
+		jQuery(document).ready(function() {
+		jQuery(".btn-tab .btn").click(function () {
+		    jQuery(".btn-tab .btn").removeClass("btn-primary").addClass("btn-default");
+		    // jQuery(".tab").addClass("active"); // instead of this do the below 
+		    jQuery(this).removeClass("btn-default").addClass("btn-primary");   
+		});
+		});
+
+        //iama access
+        jQuery('#audience-container > ul > li > ul').show();
+        jQuery('#audience-container > ul > li > ul').hide();
+        jQuery('#audience-container').mouseenter(function() {
+            jQuery('#audience-container > ul > li > ul').show();
+        }).mouseleave(function() {
+            jQuery('#audience-container > ul > li > ul').hide();
+        });
+        jQuery('#audience-container > ul > li > a').focus(function() {
+            jQuery(this).next('ul').show();
+        });
+        jQuery('ul.nav.menutopmenu > li:last-child a').focus(function() {
+            jQuery('#audience-container > ul > li > ul').hide();
+        });
+        jQuery('#audience-container > ul > li > ul > li:last-child a').blur(function() {
+            jQuery('#audience-container > ul > li > ul').hide();
+        });
+
+        //mega menu access
+        jQuery('.level0 > li > a').focus(function() {
+            var $el = jQuery(this);
+            $el.next().css('opacity', 1);
+            $el.next().css('display', 'block');
+            jQuery('.level0 > li > a').each(function() {
+                if (!$el.is(jQuery(this))) {
+                    jQuery(this).next().css('opacity', 0);
+                    jQuery(this).next().css('display', 'none');
+                }
+            });
+        });
+
+        jQuery('.mega a').blur(function() {
+            var $top, $el = jQuery(this);
+            var x = 1;
+            while (!$el.parent().hasClass('js-megamenu')) {
+                $top = $el;
+                $el = $el.parent();
+                x++;
+                if (x > 100) return;
+            }
+            jQuery('.megamenu.level0').children('li').each(function() {
+                if (!$top.is(jQuery(this))) {
+                    jQuery(this).find('.childcontent').css('opacity', 0);
+                    jQuery(this).find('.childcontent').css('display', 'none');
+                }
+            });
+        });        
+
+        //carousel access
+        jQuery('.carousel .item > a').focus(function(e) {
+            if (jQuery('.carousel').data('locked')) return;
+            jQuery('.carousel').data('locked', true);
+            if (e.originalEvent === undefined) return;
+            jQuery('.carousel').carousel('pause');
+        });
+
+        jQuery('a').blur(function(e) {
+            if (jQuery(this).parent().hasClass('item')) return;
+            jQuery('.carousel').data('locked', false);
+        });
+
+        jQuery('.carousel').on('slid.bs.carousel', function (e) {
+            if (!jQuery('.carousel').data('locked')) return;
+            jQuery(e.relatedTarget).children('a:first').focus();
+        });
+
+        //jump to content
+        jQuery('#articleBody').attr('tabindex', -1);
+        jQuery('.screen-reader-shortcut').click(function() {
+            jQuery('#articleBody').focus();
+        });
+
+        jQuery('h1,h2,h3,h4,h5,h6').each(function(){
+            $this = jQuery(this);
+            if (($this.text().trim().length === 0) && !$this.children()) {
+                $this.replaceWith(jQuery('<p>' + this.innerHTML + '</p>'));
+            }
+        });
+
+        //wistia access
+        jQuery('a').each(function() {
+            $this = jQuery(this);
+            var href = $this.attr('href');
+            if (href && (href.indexOf('fast.wistia.net') != -1) && (href.indexOf('popover=true') != -1)) {
+                $this.attr('href', href + '&amp;plugin%5Baccess%5D%5Bsrc%5D=%2F%2Fwww.uah.edu%2Ftemplates%2Fuah%2Fjs%2Fwistia.js');
+            }
+        });
+
+        jQuery('body').find('[data-toggle="videomodal"]').click(function() {
+            var modal = jQuery(this).data('target');
+            var src = jQuery(this).attr('data-thevideo');
+            var autoplay = src + '?autoplay=1';
+            jQuery(modal + ' iframe').attr('src', autoplay);
+            jQuery(modal + ' button.close').click(function() {
+                jQuery(modal + ' iframe').attr('src', src);
+            });
+            jQuery('.modal').click(function () {
+                jQuery(modal + ' iframe').attr('src', src);
+            });
+            jQuery(modal).on('hidden.bs.modal', function() {
+                jQuery(modal + ' iframe').attr('src', src);
+            });
+            jQuery(modal).modal('show');
+        });
+
+    });
+})(jQuery);
+
+//Google Custom Search GSC script
+(function() {
+window.__gcse = {
+	callback: function() {
+        	jQuery("#search").on('shown.bs.collapse', function() {
+                	jQuery(".gsc-input").focus();
+                	jQuery(".gsc-input").select();
+        	});
+                jQuery("input#gsc-i-id3.gsc-input").val(window.location.href.split('?/')[1]);
+	}
+};
+var cx = '003223053695788617002:su1y7-4lmey';
+var gcse = document.createElement('script');
+gcse.type = 'text/javascript';
+gcse.async = true;
+gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(gcse, s);
+})();
+
+window.onload = function() {
+    document.getElementById('gsc-i-id1').placeholder = 'Search';
+};
+
+window.wistiaEmbedShepherdReady = function() {
+    var iframe = {};
+
+    wistiaEmbeds.onFind(function(video) {
+        video.bind('play', function() {
+            iframe = video.iframe;
+        });
+    });
+
+    jQuery('body').bind('keyup', function(e) {
+        if (!iframe.contentWindow) return;
+        if ((e.which == 32) || (e.which == 67) || (e.which == 99)) {
+            iframe.contentWindow.postMessage(e.which, window.location.protocol + '//fast.wistia.net');
+        }
+    });
+
+    jQuery('body').bind('keydown', function(e) {
+        if (!iframe.contentWindow) return;
+        if (e.which == 37) {
+            iframe.contentWindow.postMessage(e.which, window.location.protocol + '//fast.wistia.net');    
+        }
+        if (e.which == 39) {
+            iframe.contentWindow.postMessage(e.which, window.location.protocol + '//fast.wistia.net');    
+        }
+    });
+};
+

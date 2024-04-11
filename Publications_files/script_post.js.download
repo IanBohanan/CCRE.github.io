@@ -1,0 +1,22 @@
+const getCookie = (name) => {
+    const value = ' ' + document.cookie;
+    const parts = value.split(' ' + name + '=');
+    return parts.length < 2 ? undefined : parts.pop().split(';').shift();
+};
+
+
+
+    const cookiesBanner = document.getElementById('sp-cookie-consent');
+    const cookieName = 'spcookie_status';
+    const hasCookie = getCookie(cookieName);
+    const hostName = window.location.hostname;
+
+    if(!hasCookie) {
+		cookiesBanner.removeAttribute('hidden');
+		cookiesBanner.style.removeProperty('display');
+    } else {
+
+
+    }
+
+
